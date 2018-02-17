@@ -1,0 +1,43 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace CalculadoraTriangulo
+{  
+
+public class CalculadoraTriangulo {
+	
+	public int BuscaTotalMaximo(int[][] triangle)
+    {
+		if(!valido(triangle)) 
+        {
+            throw new ArgumentOutOfRangeException("Não é um triangulo!");
+		}
+		
+		for(int row = triangle.Length-2; row >= 0; row--)
+        {
+			for(int col = 0; col <= row; col++)
+            {
+				int left = triangle[row][col] + triangle[row+1][col];
+				int right = triangle[row][col] + triangle[row+1][col+1];
+				triangle[row][col] = Math.Max(left, right);
+			}
+		}
+		
+		return triangle[0][0];
+	}
+
+	private Boolean valido(int[][] triangle) 
+    {
+		Boolean valido = true;
+		for(int row = 0; row < triangle.Length; row++)
+        {
+			if(triangle[row].Length != row + 1)
+				valido = false;
+		}
+		return valido;
+	}
+}
+}
