@@ -1,0 +1,42 @@
+using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+namespace CalculadoraTrianguloTeste
+{
+    [TestClass]
+    public class CalculadoraTrianguloTeste
+    {
+        private CalculadoraTriangulo calculator;
+
+        [TestMethod]
+        public void setUp()
+        {
+            this.calculator = new CalculadoraTriangulo();
+        }
+
+        [TestMethod]
+        [ExpectedException(ArgumentOutOfRangeException.calculator)]
+	    public void RecusarTrianguloInvalido() 
+        {
+		int[][] triangle = {{1,5},{10,7},{4,2,5}};
+		
+		calculator.BuscaTotalMaximo(triangle);
+	    }
+
+        [TestMethod]
+	    public void RetornarValorEsperadoParaTresNiveis()
+        {
+		int[][] triangle = {{6},{3,5},{9,7,1}};
+		
+		Assert.AreEqual(18, calculator.BuscaTotalMaximo(triangle));
+	    }
+	
+	    [TestMethod]
+	    public void RetornarValorEsperadoParaQuatroNiveis()
+        {
+		int[][] triangle = {{6},{3,5},{9,7,1},{4,6,8,4}};
+
+		Assert.AreEqual(26, calculator.BuscaTotalMaximo(triangle));
+	    }
+    }
+}
